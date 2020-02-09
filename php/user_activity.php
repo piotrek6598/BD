@@ -53,7 +53,8 @@ if (empty($tweets)){
 }
 oci_execute($cursor);
 
-echo "User <b>" . $name . "</b> posted <b>" . $tweets .  "</b> tweet" . form($tweets) . ", used <b>". $hashtags . "</b> hashtag" . form($hashtags) . "<br />\n";
+echo "User <b>" . $name . "</b> posted <b>" . $tweets .  "</b> tweet" . form($tweets) . ", used <b>". $hashtags . 
+	"</b> hashtag" . form($hashtags) . "<br />\n";
 while (($row = oci_fetch_array($cursor, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
 	echo expandGroup($row['INTERVAL']) . " <b>" . $row['TWEETS'] . "</b> tweet" . form($row['TWEETS']) . "<br />\n";
 }
