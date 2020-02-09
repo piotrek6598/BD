@@ -1,6 +1,7 @@
 <html>
 <body>
 <?php
+	
 $limit = $_POST['limit'];
 $priority = $_POST['priority'];
 $details = $_POST['details'];
@@ -52,26 +53,25 @@ while (($row = oci_fetch_array($cursor, OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
 	echo "User <b>" . $row['NAME'] . "</b> posted <b>" . $row['TWEETS'] . "</b> tweet" .
 	form($row['TWEETS']) . " with <b>" . $row['HASHTAGS'] . "</b> hashtag" . form($row['HASHTAGS']) .
 	", mentioned other users <b>" . $row['MENTIONS'] . "</b> time" . form($row['MENTIONS']) . 
-	", was mentioned <b>" . $row['MENTIONED'] . "</b> time" . form($row['MENTIONED']) . " and has <b>". $row['FOLLOWERS']. "</b> follower". 
-form($row['FOLLOWERS']) .".<br />\n";
+	", was mentioned <b>" . $row['MENTIONED'] . "</b> time" . form($row['MENTIONED']) . 
+	" and has <b>". $row['FOLLOWERS']. "</b> follower". form($row['FOLLOWERS']) .".<br />\n";
 	} else {
 		echo "User <b>" . $row['NAME'] . "</b> ";
 		switch ($priority){
 			case "tweets":
-				echo "posted <b>" . $row['TWEETS']. "</b> 				tweet" . form($row['TWEETS']);
+				echo "posted <b>" . $row['TWEETS']. "</b> tweet" . form($row['TWEETS']);
 				break;
 			case "hashtags":
-				echo "used <b>" . $row['HASHTAGS']. "</b> 				hashtag" . form ($row['HASHTAGS']);
+				echo "used <b>" . $row['HASHTAGS']. "</b> hashtag" . form ($row['HASHTAGS']);
 				break;
 			case "mentions":
-				echo "mentioned other users <b>" . 					$row['MENTIONS'] . "</b> time" . 					form($row['MENTIONS']);
+				echo "mentioned other users <b>" . $row['MENTIONS'] . "</b> time" . form($row['MENTIONS']);
 				break;
 			case "mentioned":
-				echo "was mentioned <b>" . 
-				$row['MENTIONED'] . "</b> time" . 					form($row['MENTIONED']);
+				echo "was mentioned <b>" . $row['MENTIONED'] . "</b> time" . form($row['MENTIONED']);
 				break;
 			case "followers":
-				echo "has <b>" . $row['FOLLOWERS']. "</b> 				follower" . form($row['FOLLOWERS']);
+				echo "has <b>" . $row['FOLLOWERS']. "</b> follower" . form($row['FOLLOWERS']);
 				break;
 		}
 		echo "<br/ >\n";
