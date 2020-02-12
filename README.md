@@ -2,7 +2,7 @@
 
 # Description
 
-Database enables user to collect some information about twitter users and theirs activity. All informations are collected from Twitter API .json files. <br/>
+Database enables user to collect some information about twitter's users and theirs activity. All informations are collected from Twitter API .json files. <br/>
 Database abilities: <br/>
 -> Uploading new .json file <br/>
 -> Getting user's profile analysis containing summary of posted tweets, used hashtags, mentionied users, number of followers and time activity <br/>
