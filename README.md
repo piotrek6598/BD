@@ -1,6 +1,6 @@
 # Project for Databases 2019/20 at MIMUW University of Warsaw
 
-# Describtion
+# Description
 
 Database enables user to collect some information about twitter users and theirs activity. All informations are collected from Twitter API .json files. <br/>
 Database abilities: <br/>
