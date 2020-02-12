@@ -15,7 +15,7 @@ Database abilities: <br/>
 
 To run database at any server you need to:
 
-1. Create new user with privilege to create and update tables, sequences, function and procedures. <br/>
+1. Create new (or use existing) user with privilege to create and update tables, sequences, functions and procedures. <br/>
 2. Create new path by CREATE OR REPLACE DIRECTORY JSON_DIR as 'path', where 'path' is place where .json files have to be stored. It is possible to create DIRECTORY with other name, but you have to change procedure parse_json_file in project_parse.sql file by substitute in section IS in function utl_file.fopen 'JSON_DIR' for new DIRECTORY name. <br/>
 3. Give user privilege to read this directory. <br/>
 4. Run scripts: project_tables.sql, project_parse.sql, project_analysis.sql <br/>
