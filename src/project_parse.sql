@@ -1,10 +1,19 @@
 -- Wrappers for inserting which prevents adding same information two times.
+
+/* Procedure user_insert_or_update inserts new user or update user's informations.
+   Followers_count_in setted as -1 avoid updating this field. In case of new users
+   followers_count_in = 1 is equivalent to followers_count_in = 0.
+   @param user_id_in[in]           - user id
+   @param name_in[in]              - user's name
+   @param followers_count_in[in]   - number of user's followers.
+   */
 CREATE OR REPLACE PROCEDURE users_insert_or_update (user_id_in in VARCHAR2, 
 	name_in in VARCHAR2, followers_count_in in NUMBER)
 IS
 	user_in NUMBER;
 BEGIN
 
+-- checking if user exists in database
 SELECT count(*)
 INTO user_in
 FROM users
@@ -23,6 +32,11 @@ END IF;
 END;
 /
 
+/* Function time_insert inserts given date with next time id.
+   Do nothing if date was already inserterted.
+   @param data_in[in]   - date to be inserted.
+   @return Id representing this date.
+   */
 CREATE OR REPLACE FUNCTION time_insert (data_in in VARCHAR2)
 	RETURN NUMBER
 IS
@@ -48,6 +62,14 @@ RETURN time_id1;
 END;
 /
 
+/* Procedure tweet_insert_or_update inserts new tweet or update number
+   of retweets if tweet was already inserted.
+   @param tweet_in[in]     - id of tweet;
+   @param user_in[in]      - id of tweet's author;
+   @param time_in[in]      - id of tweet's time;
+   @param text_in[in]      - text of tweet;
+   @param retweet_in[in]   - number of retweets.
+   */
 CREATE OR REPLACE PROCEDURE tweet_insert_or_update (tweet_in in VARCHAR2, 
 	user_in in VARCHAR2, time_in in NUMBER, text_in in VARCHAR2, 
 	retweet_in in NUMBER)
@@ -55,6 +77,7 @@ IS
 	tweet_count NUMBER;
 BEGIN
 
+-- checking if tweet exists in database
 SELECT count(*)
 INTO tweet_count
 FROM tweet
@@ -69,6 +92,10 @@ END IF;
 END;
 /
 
+/* Procedure mention_insert inserts new mention
+   @param user_in    - id of mentioned user;
+   @param tweet_in   - id of tweet in which mention is enclosed.
+   */
 CREATE OR REPLACE PROCEDURE mention_insert (user_in in VARCHAR2,
 	tweet_in in VARCHAR2)
 IS
@@ -77,12 +104,18 @@ INSERT INTO mention VALUES (mention_seq.nextval, user_in, tweet_in);
 END;
 /
 
+/* Function hashtag_insert insert new hashtag with next hashtag id.
+   Do nothing if hashtag was already inserted.
+   @param name_in[in]   - name of hashtag.
+   @return id of hashtag.
+   */
 CREATE OR REPLACE FUNCTION hashtag_insert (name_in in VARCHAR2)
 	RETURN NUMBER
 IS
 	id NUMBER;
 BEGIN
 
+-- checking if hashtag exists in database
 BEGIN
 SELECT hashtag_id
 INTO id
@@ -101,6 +134,10 @@ RETURN id;
 END;
 /
 
+/* Procedure tweet_hashtag_insert inserts new usage of hashtag in tweet.
+   @param tweet_in[in]     - id of tweet;
+   @param hashtag_in[in]   - id of hashtag.
+   */
 CREATE OR REPLACE PROCEDURE tweet_hashtag_insert (tweet_in in VARCHAR2, 
 	hashtag_in in NUMBER)
 IS
