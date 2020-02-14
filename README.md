@@ -20,5 +20,5 @@ To run database at any server you need to:
 3. Give user privilege to read this directory. <br/>
 4. Run scripts: project_tables.sql, project_parse.sql, project_analysis.sql <br/>
 5. Place .php files at server. <br/>
-6. In file index.php modify $user, $password to correct user's data. <br/>
+6. In file index.php modify $user, $password to correct user's data and $dir to correct json directory. <br/>
 7. Run index.php <br/>
