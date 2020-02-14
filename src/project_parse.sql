@@ -4,7 +4,7 @@
    @author Piotr Jasinski <jasinskipiotr99@gmail.com>
    */
 
-/* Procedure user_insert_or_update inserts new user or update user's informations.
+/* Procedure user_insert_or_update inserts new user or update user's information.
    Followers_count_in setted as -1 avoid updating this field. In case of new users
    followers_count_in = 1 is equivalent to followers_count_in = 0.
    @param user_id_in[in]           - user id
@@ -153,7 +153,7 @@ END;
 
 -- Twitter JSON file's parsers.
 
-/* Function parse_user extracts informations about user and add user
+/* Function parse_user extracts information about user and add user
    to database.
    @param fid[in]   - utl file id.
    @return User's id.
