@@ -148,6 +148,12 @@ END;
 
 
 -- Twitter JSON file's parsers.
+
+/* Function parse_user extracts informations about user and add user
+   to database.
+   @param fid[in]   - utl file id.
+   @return User's id.
+   */
 CREATE OR REPLACE FUNCTION parse_user (
 	fid in utl_file.file_type)
 	RETURN VARCHAR2
@@ -170,6 +176,7 @@ IF line like '%{%' THEN
 	j := j + 1;
 END IF;
 
+-- extracting user's id
 IF line like '%"id"%' AND id_lock = 0 THEN 
 	posbeg := INSTR(line, ':') + 2;
 	posend := INSTR(line, ',') - 1;
@@ -177,6 +184,7 @@ IF line like '%"id"%' AND id_lock = 0 THEN
 	id_lock := 1;
 END IF;
 
+-- extracting user's nickname
 IF line like '%"screen_name"%' AND name_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 3;
 	posend := INSTR(line, ',') - 2;
@@ -184,6 +192,7 @@ IF line like '%"screen_name"%' AND name_lock = 0 THEN
 	name_lock := 1;
 END IF;
 
+-- extracting number of followers
 IF line like '%"followers_count"%' AND followers_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 2;
 	posend := INSTR(line, ',') - 1;
@@ -204,6 +213,10 @@ RETURN id;
 END;
 /
 
+/* Procedure parse_hashtags adds hashtags used in tweet.
+   @param fid[in]        - utl file id;
+   @param tweet_in[in]   - id of tweet.
+   */
 CREATE OR REPLACE PROCEDURE parse_hashtags (
 	fid in utl_file.file_type, tweet_in in VARCHAR2)
 IS
@@ -215,6 +228,7 @@ IS
 	id NUMBER;
 BEGIN
 
+-- checking if tweet was already parsed
 SELECT count(*)
 INTO id
 FROM tweet_hashtag
@@ -231,6 +245,7 @@ IF line like '%[%' THEN
 	j := j + 1;
 END IF;
 
+-- extracting hashtag's name
 IF line like '%"text"%' THEN
 	posbeg := INSTR(line, ':') + 3;
 	posend := INSTR(line, '",') - 1;
@@ -248,6 +263,10 @@ END LOOP;
 END;
 /
 
+/* Procedure parse_user_mentions adds mentions used in tweet.
+   @param fid[in]        - utl file id;
+   @param tweet_in[in]   - id of tweet.
+   */
 CREATE OR REPLACE PROCEDURE parse_user_mentions (
 	fid in utl_file.file_type, tweet_in in VARCHAR2)
 IS
@@ -260,6 +279,7 @@ IS
 	name_lock NUMBER := 0;
 BEGIN
 
+-- cheking if tweet was already parsed
 SELECT count(*)
 INTO j
 FROM mention
@@ -278,6 +298,7 @@ IF line like '%[%' THEN
 	j := j + 1;
 END IF;
 
+-- extracting user's nickname
 IF line like '%"screen_name"%' AND name_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 3;
 	posend := INSTR(line, '",') - 1;
@@ -285,6 +306,7 @@ IF line like '%"screen_name"%' AND name_lock = 0 THEN
 	name_lock := 1;
 END IF;
 
+-- extracting user's id
 IF line like '%"id"%' THEN
 	posbeg := INSTR(line, ':') + 2;
 	posend := INSTR(line, ',') - 1;
@@ -303,6 +325,9 @@ END LOOP;
 END;
 /
 
+/* Procedure parse_tweet adds new tweet to database.
+   @param fid[in]   - utl file id.
+   */
 CREATE OR REPLACE PROCEDURE parse_tweet (
 	fid in utl_file.file_type)
 IS
@@ -328,6 +353,7 @@ IF line like '%{%' THEN
 	j := j + 1;
 END IF;
 
+-- extracting date
 IF line like '%"created_at"%' AND created_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 3;
 	posend := INSTR(line, '",') - 1;
@@ -335,6 +361,7 @@ IF line like '%"created_at"%' AND created_lock = 0 THEN
 	created_lock := 1;
 END IF;
 
+-- extracting tweet's id
 IF line like '%"id"%' AND id_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 2;
 	posend := INSTR(line, ',') - 1;
@@ -342,6 +369,7 @@ IF line like '%"id"%' AND id_lock = 0 THEN
 	id_lock := 1;
 END IF;
 
+-- extracting tweet's content
 IF line like '%"text"%' AND text_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 3;
 	posend := INSTR(line, '",') - 1;
@@ -349,24 +377,29 @@ IF line like '%"text"%' AND text_lock = 0 THEN
 	text_lock := 1;
 END IF;
 
+-- adding hashtags used in tweet
 IF line like '%"hashtags": [' THEN
 	parse_hashtags(fid, id);
 END IF;
 
+-- adding mentions used in tweet
 IF line like '%"user_mentions": [' THEN
 	parse_user_mentions(fid, id);
 END IF;
 
+-- adding author of tweet
 IF line like '%"user": {' THEN
 	user_id := parse_user(fid);
 	j := j - 1;
 END IF;
 
+-- if tweet is a retweet, adding original first tweet
 IF line like '%"retweeted_status": {' THEN
 	parse_tweet(fid);
 	j := j - 1;
 END IF;
 
+-- extracting number of retweets
 IF line like '%"retweet_count":%' AND retweet_lock = 0 THEN
 	posbeg := INSTR(line, ':') + 2;
 	posend := INSTR(line, ',') - 1;
@@ -383,17 +416,23 @@ END LOOP;
 
 time_id := time_insert(created_at);
 
-tweet_insert_or_update(id, user_id, time_id, text, 	retweet_count); 
+tweet_insert_or_update(id, user_id, time_id, text, retweet_count); 
 END;
 /
 
+/* Procedure parse_json_file parses twitter .json file.
+   @param file[in]   - name of file in JSON_DIR to be parsed.
+   */
 CREATE OR REPLACE PROCEDURE parse_json_file(file in VARCHAR2)
 IS
+	-- if directory storing .json file calls other than 'JSON_DIR'
+	-- you need to change it here
 	fid utl_file.file_type := utl_file.fopen('JSON_DIR', file, 'R');
 	line VARCHAR2(2000);
 BEGIN
 utl_file.get_line(fid, line);
 
+-- disabling constraints because mentions and hashtags are inserted before tweet
 EXECUTE IMMEDIATE 'ALTER TABLE tweet_hashtag DISABLE CONSTRAINTS tweet_hashtag_tweet_id_fk';
 EXECUTE IMMEDIATE 'ALTER TABLE mention DISABLE CONSTRAINTS mention_tweet_id_fk';
 
@@ -409,6 +448,7 @@ END LOOP;
 
 utl_file.fclose(fid);
 
+-- enabling base integrity constraints
 EXECUTE IMMEDIATE 'ALTER TABLE tweet_hashtag ENABLE CONSTRAINTS tweet_hashtag_tweet_id_fk';
 EXECUTE IMMEDIATE 'ALTER TABLE mention ENABLE CONSTRAINTS mention_tweet_id_fk';
 END;
