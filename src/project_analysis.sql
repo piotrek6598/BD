@@ -1,5 +1,9 @@
--- Functions and procedures returning sys_refcursor and/or other parameters
--- with result of querries that are necessary to provide analysis.
+/* @file
+   Functions and procedures returning sys_refcursor and/or other parameters
+   with result of querries that are necessary to provide analysis.
+
+   @author Piotr Jasinski <jasinskipiotr99@gmail.com>
+   */
 
 /* Procedure hashtag_use_analysis retrieves most frequently used hashtags.
    @param limit_in[in]   - maximal number of extracted hashtags, if not

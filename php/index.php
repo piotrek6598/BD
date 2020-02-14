@@ -1,4 +1,10 @@
 <html>
+<!--
+Home page enabling choose of analysis type.
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com> 
+-->
+
 <?php
 
 $user = "c##piotr1";
@@ -12,7 +18,7 @@ Welcome to twitter analyser.
 
 <br><br>
 <font size="4">
-Upload new JSON data file or choose one of the following available analyse type. You can also remove all inserted previously data.
+Upload new JSON data file or choose one of the following available analysis type. You can also remove all inserted previously data.
 </font>
 </br></br>
 

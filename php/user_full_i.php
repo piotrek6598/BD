@@ -1,4 +1,9 @@
 <html>
+<!--
+User full analysis interface.
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 
 This report provides following information:<br><br>
@@ -7,7 +12,7 @@ This report provides following information:<br><br>
 <b>&rarr;</b> number of followers <br>
 <b>&rarr;</b> number of user's mentions <br>
 <b>&rarr;</b> number of times user was mentioned <br>
-<b>&rarr;</b> user time activity <br><br>
+<b>&rarr;</b> user's time activity <br><br>
 Enter user's nickname to get report.</br>
 
 

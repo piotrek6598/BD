@@ -1,7 +1,12 @@
 <html>
+<!---
+Hashtags comparision interface.
+
+@author Piotr Jasinski <jasinskipiotr99@gamil.com>
+-->
 <body>
 
-This type of analyse compares hashtags by number of uses.
+This type of analysis compares hashtags by number of uses.
 <br> Enter the limit of most frequently used hashtags you want to receive. If you remain the field free, the default limit of <b>30</b> hashtags is used. </br>
 
 <br><form action="compare_hashtags.php" method="post" target="_blank">

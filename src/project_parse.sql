@@ -1,4 +1,8 @@
--- Wrappers for inserting which prevents adding same information two times.
+/* @file 
+   Wrappers for inserting which prevents adding same information two times.
+
+   @author Piotr Jasinski <jasinskipiotr99@gmail.com>
+   */
 
 /* Procedure user_insert_or_update inserts new user or update user's informations.
    Followers_count_in setted as -1 avoid updating this field. In case of new users

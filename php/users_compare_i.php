@@ -1,13 +1,19 @@
 <html>
+<!--
+Users comparision interface.
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
+
 <body>
 
-This type of analyse compares users by one of the following aspects: <br><br>
+This type of analysis compares users by one of the following aspects: <br><br>
 <b>&rarr;</b> number of tweets <br>
 <b>&rarr;</b> number of hashtags <br>
 <b>&rarr;</b> number of mentions <br>
-<b>&rarr;</b> number of time user was mentioned <br>
+<b>&rarr;</b> number of times user was mentioned <br>
 <b>&rarr;</b> number of followers <br><br>
-To get report choose aspect, comparision type and enter limit of users you want to receive.<br> Aspect comparision provides information for each user only about aspect, full comparision provides all other details too. <br>If you remain field default limit of <b>30</b> users is used.</br>
+To get report choose aspect, comparision type and enter limit of users you want to receive.<br> Aspect comparision provides information for each user only about aspect, full comparision provides all other details too. <br>If you remain limit field free, default limit of <b>30</b> users is used.</br>
 
 <br><form action="users_compare.php" method="post" target="_blank">
 <input type="radio" name="priority" value="tweets" checked> tweets<br>

@@ -1,7 +1,12 @@
 <html>
+<!--
+User activity analysis interface.
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 
-This type of analyse provides total number of user's tweets and hashtags used. <br>Tweets are divided into four 6-hours intervals. First interval starts from 00:00 GMT.
+This type of analysis provides total number of user's tweets and hashtags used. <br>Tweets are divided into four 6-hours intervals. First interval starts from 00:00 GMT.
 <br> Enter user's nickname to get report. </br>
 
 <br><form action="user_activity.php" method="post" target="_blank">

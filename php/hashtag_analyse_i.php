@@ -1,7 +1,12 @@
 <html>
+<!--
+Hashtag's use analysis interface.
+
+@author Piotr Jasinski <jasinskipiotr99@gamil.com>
+-->
 <body>
 
-This type of analyse provides report about total use of hashtag divided into four 6-hours intervals. The first inteval starts from 00:00 GMT.
+This type of analysis provides report about total use of hashtag divided into four 6-hours intervals. The first inteval starts from 00:00 GMT.
 <br> Enter hashtag to get report. </br>
 
 <br><form action="hashtag_analyse.php" method="post" target="_blank">

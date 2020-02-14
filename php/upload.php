@@ -1,4 +1,9 @@
 <html>
+<!--
+Uploads new .json file
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 <?php
 

@@ -1,4 +1,9 @@
 <html>
+<!--
+Performs user activity analysis
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 <?php
 $name = $_POST['name'];

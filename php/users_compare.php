@@ -1,4 +1,9 @@
 <html>
+<!--
+Performs users comaprision
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 <?php
 	
@@ -42,7 +47,7 @@ oci_execute($cursor);
 
 echo "<b> List of " . $limit . " users ordered by number of ";
 if ($priority == "mentioned"){
-	echo " being mentioned";
+	echo " times being mentioned";
 } else {
 	echo $priority;
 }

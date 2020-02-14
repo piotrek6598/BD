@@ -1,4 +1,8 @@
--- Drops and creates all necessary tables and sequences.
+/* @file
+   Drops and creates all necessary tables and sequences.
+
+   @author Piotr Jasinski <jasinskipiotr99@gmail.com>
+   */
 
 DROP TABLE TWEET_HASHTAG;
 DROP TABLE HASHTAG;

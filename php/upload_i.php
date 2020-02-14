@@ -1,4 +1,9 @@
 <html>
+<!--
+Uploading new .json file interface.
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 Put the file in the: <b>C:\json_dir</b> directory and enter file's full name below.
 <br>

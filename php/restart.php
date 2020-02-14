@@ -1,4 +1,9 @@
 <html>
+<!--
+Clears all data from database
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 <?php
 

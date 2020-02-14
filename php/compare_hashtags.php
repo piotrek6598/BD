@@ -1,4 +1,9 @@
 <html>
+<!--
+Performs hashtags comparision.
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 <?php
 $limit = $_POST['limit'];

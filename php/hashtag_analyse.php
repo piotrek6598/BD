@@ -1,4 +1,9 @@
 <html>
+<!--
+Performs hashtag's use analysis
+
+@author Piotr Jasinski <jasinskipiotr99@gmail.com>
+-->
 <body>
 <?php
 $hashtag = $_POST['hashtag'];
