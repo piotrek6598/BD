@@ -7,8 +7,10 @@ Home page enabling choose of analysis type.
 
 <?php
 
+/* Data to be changed by user */
 $user = "c##piotr1";
 $password = "bdproject";
+$dir = "C:\json_dir"
 
 ?>
 <body>
@@ -26,6 +28,7 @@ Upload new JSON data file or choose one of the following available analysis type
 Upload file.
 <input type="hidden" name="user" value="<?php echo $user; ?>"/>
 <input type="hidden" name="password" value="<?php echo $password; ?>"/>
+<input type="hidden" name="dir" value="<?php echo $dir; ?>"/>
 <input type="submit" value="upload"/>
 </form>
 
