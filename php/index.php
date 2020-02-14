@@ -10,7 +10,7 @@ Home page enabling choose of analysis type.
 /* Data to be changed by user */
 $user = "c##piotr1";
 $password = "bdproject";
-$dir = "C:\json_dir"
+$dir = "C:\json_dir";
 
 ?>
 <body>
