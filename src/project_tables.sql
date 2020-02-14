@@ -55,7 +55,7 @@ CREATE TABLE TWEET
 	tweet_id VARCHAR2(30) NOT NULL,
 	user_id VARCHAR2(30) NOT NULL,
 	time_id NUMBER NOT NULL,
-	text VARCHAR2(200) NOT NULL,
+	text VARCHAR2(300) NOT NULL,
 	retweet_count NUMBER NOT NULL,
 	CONSTRAINTS TWEET_tweet_id_pk PRIMARY KEY (tweet_id),
 	CONSTRAINTS TWEET_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id),
