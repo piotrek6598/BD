@@ -338,7 +338,7 @@ IS
 	line VARCHAR2(2000);
 	j NUMBER := 1;
 	id VARCHAR2(30);
-	text VARCHAR2(200);
+	text VARCHAR2(300);
 	created_at VARCHAR2(50);
 	user_id VARCHAR2(20);
 	posbeg NUMBER;
